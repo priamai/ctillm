@@ -1,7 +1,7 @@
 import modal
 import time
 
-from .common import stub, vllm_image, VOLUME_CONFIG
+from common import stub, vllm_image, VOLUME_CONFIG
 
 
 @stub.cls(
@@ -58,9 +58,11 @@ class Inference:
 
 @stub.local_entrypoint()
 def inference_main(run_folder: str):
-    text = input(
-        "Enter a prompt (including the prompt template, e.g. [INST] ... [/INST]):\n"
-    )
+
+    example = """        [INST]Which MITRE technique is described in this sentence?
+    Adversaries may execute active reconnaissance scans to gather information that can be used during targeting.
+    [/INST]"""
     print("Loading model ...")
-    for chunk in Inference(f"{run_folder}/lora-out/merged").completion.remote_gen(text):
+
+    for chunk in Inference(f"{run_folder}/lora-out/merged").completion.remote_gen(example):
         print(chunk, end="")
