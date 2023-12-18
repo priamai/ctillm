@@ -57,7 +57,7 @@ def run_enterprise_attck():
 
             pbar.update(1)
 
-    with open("./train/enterprise_attack.jsonl","w") as file:
+    with open("./modal-labs/enterprise_attack.jsonl","w") as file:
         for sample in samples:
             file.write(json.dumps(sample))
     logging.debug("Saved as JSONL")
