@@ -1,6 +1,6 @@
 import json
 import logging
-
+logging.basicConfig(level=logging.DEBUG)
 import spacy
 from spacy.lang.en import English
 
@@ -39,7 +39,7 @@ def run_enterprise_attck():
         #ics_attck_json="https://raw.githubusercontent.com/mitre/cti/master/ics-attack/ics-attack.json",
     )
     logging.debug("Done loading!")
-    template = {"question": "What is MITRE technique?", "context": None, "answer": None}
+    template = {"question": "Which is the MITRE technique?", "context": None, "answer": None}
     samples = []
     logging.debug("Generating training set via sentence split")
     with tqdm(total=len(attck.enterprise.techniques)) as pbar:
@@ -57,7 +57,7 @@ def run_enterprise_attck():
 
             pbar.update(1)
 
-    with open("enterprise_attack.jsonl","w") as file:
+    with open("./train/enterprise_attack.jsonl","w") as file:
         for sample in samples:
             file.write(json.dumps(sample))
     logging.debug("Saved as JSONL")
