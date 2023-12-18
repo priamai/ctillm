@@ -1,6 +1,7 @@
 import json
 
-from pyattck import Attck
+import spacy
+from spacy.lang.en import English
 
 from pyattck import Attck
 
@@ -17,6 +18,8 @@ attck = Attck(
     ics_attck_json="https://raw.githubusercontent.com/mitre/cti/master/ics-attack/ics-attack.json",
 )
 
+nlp_web_en = spacy.load('en_core_web_sm')
+
 name_tactic = {}
 for technique in attck.enterprise.techniques:
     print(technique.id)
@@ -26,9 +29,7 @@ for technique in attck.enterprise.techniques:
 
     phases = technique.kill_chain_phases
 
-    name_tactic[tactic]=(technique.name,technique.description)
+    name_tactic[tactic]=(technique.name,nlp_web_en(technique.description).sents)
 
 with open("enterprise_attack.json","w") as file:
     json.dump(name_tactic,file)
-
-
