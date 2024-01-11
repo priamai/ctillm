@@ -60,8 +60,11 @@ def run_enterprise_attck():
     with open("./modal-labs/enterprise_attack.jsonl","w") as file:
         for sample in samples:
             file.write(json.dumps(sample))
+
     logging.debug("Saved as JSONL")
+
 import argparse
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("-test_spacy", default=False,action="store_true")
