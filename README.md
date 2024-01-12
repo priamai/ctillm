@@ -21,6 +21,13 @@ This no-frills guide will take you from a dataset to using a fine-tuned LLM for 
 
 
 Using Modal for fine-tuning means you never have to worry about infrastructure headaches like building images and provisioning GPUs. If a training script runs on Modal, it's reproducible and scalable enough to ship to production right away.
+## Prepare Hugging Face
+
+The file inside utils create the hugging face repository and then upload the training set.
+
+```bash
+huggingface-cli login
+```
 
 ## Quickstart
 
@@ -50,12 +57,14 @@ python ./utils/main.py
 
 3. Launch a training job:
 ```bash
-modal run --detach src.train
+cd modal
+modal run --detach train
 ```
 
 4. Try the model from a completed training run. You can select a folder via `modal volume ls example-runs-vol`, and then specify the training folder with the `--run-folder` flag (something like `/runs/axo-2023-11-24-17-26-66e8`) for inference:
 
 ```bash
+cd modal
 modal run -q src.inference --run-folder /runs/<run_tag>
 ```
 

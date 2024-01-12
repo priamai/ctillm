@@ -1,3 +1,4 @@
 pyattck
 spacy
 modal
+git+https://github.com/huggingface/huggingface_hub
