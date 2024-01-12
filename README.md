@@ -52,7 +52,8 @@ cd ctillm
 Then create the training set 
 
 ```bash
-python ./utils/main.py
+cd utils
+python alpaca_train_generator.py
 ```
 
 3. Launch a training job:
@@ -61,7 +62,7 @@ cd modal
 modal run --detach train
 ```
 
-4. Try the model from a completed training run. You can select a folder via `modal volume ls example-runs-vol`, and then specify the training folder with the `--run-folder` flag (something like `/runs/axo-2023-11-24-17-26-66e8`) for inference:
+4. Try the model from a completed training run. You can select a folder via `modal volume ls mitre-runs-vol`, and then specify the training folder with the `--run-folder` flag (something like `/runs/axo-2023-11-24-17-26-66e8`) for inference:
 
 ```bash
 cd modal
