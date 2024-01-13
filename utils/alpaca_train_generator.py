@@ -77,7 +77,7 @@ def gen_enterprise_attck_alpaca():
 
     with open("./modal/enterprise_attack.jsonl","w") as file:
         for sample in samples:
-            file.write(json.dumps(sample))
+            file.write(json.dumps(sample)+"\n")
 
     #push to hugging face
     api = HfApi()
