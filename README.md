@@ -69,7 +69,7 @@ cd modal
 modal run -q src.inference --run-folder /runs/<run_tag>
 ```
 
-The default configuration fine-tunes CodeLlama Instruct 7B on a text-to-SQL dataset for five epochs (takes a few minutes) as a proof of concept. It uses DeepSpeed ZeRO-3 to shard the model state across 2 A100s. Inference on the fine-tuned model displays conformity to the output structure (`[SQL] ... [/SQL]`). To achieve better results, you would need to use more data! Refer to the full development section below.
+The default configuration fine-tunes Llama 7B on the MITRE dataset for five epochs (takes a few minutes) as a proof of concept. It uses DeepSpeed ZeRO-3 to shard the model state across 2 A100s. Inference on the fine-tuned model displays conformity to the output structure (`[SQL] ... [/SQL]`). To achieve better results, you would need to use more data! Refer to the full development section below.
 
 5. (Optional) Launch the GUI for easy observability of training status.
 
@@ -101,7 +101,7 @@ You can `example_configs` for quick start with different models. We recommend du
 
 **Model**
 ```yaml
-base_model: codellama/CodeLlama-7b-Instruct-hf
+base_model: NousResearch/Llama-2-7b-hf
 ```
 
 **Dataset** (by default we upload a local .jsonl file from the `src` folder, but you can see all dataset options [here](https://github.com/OpenAccess-AI-Collective/axolotl#dataset))
@@ -172,7 +172,7 @@ wandb_watch: gradients
 A simple training job can be started with
 
 ```bash
-modal run --detach src.train
+modal run --detach train
 ```
 
 _`--detach` lets the app continue running even if your client disconnects_.
@@ -188,7 +188,7 @@ The default configuration fine-tunes CodeLlama Instruct 7B to understand Modal d
 To try a model from a completed run, you can select a folder via `modal volume ls examples-runs-vol`, and then specify the training folder for inference:
 
 ```bash
-modal run -q src.inference::inference_main --run-folder /runs/axo-2023-11-24-17-26-66e8
+modal run -q inference::inference_main --run-folder /runs/axo-2023-11-24-17-26-66e8
 ```
 
 
@@ -197,8 +197,8 @@ modal run -q src.inference::inference_main --run-folder /runs/axo-2023-11-24-17-
 Deploy the training backend with three business functions (`launch`, `train`, `completion` in `__init__.py`). Then run the Gradio GUI.
 
 ```bash
-modal deploy src
-modal run src.gui
+modal deploy modal
+modal run modal.gui
 ```
 
 The `*.modal.host` link from the latter will take you to the Gradio GUI. There will be three tabs: launch training runs, test out trained models and explore the files on the volume.
