@@ -57,11 +57,9 @@ class Inference:
 
 
 @stub.local_entrypoint()
-def inference_main(run_folder: str):
+def inference_main(run_folder: str,sentence:str):
 
-    example = """        [INST]Which MITRE technique is described in this sentence?
-    Adversaries may execute active reconnaissance scans to gather information that can be used during targeting.
-    [/INST]"""
+    example = """### Instruction: List the MITRE techniques contained in the text. ### Input: {0}""".format(sentence)
     print("Loading model ...")
 
     for chunk in Inference(f"{run_folder}/lora-out/merged").completion.remote_gen(example):

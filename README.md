@@ -107,19 +107,9 @@ base_model: NousResearch/Llama-2-7b-hf
 **Dataset** (by default we upload a local .jsonl file from the `src` folder, but you can see all dataset options [here](https://github.com/OpenAccess-AI-Collective/axolotl#dataset))
 ```yaml
 datasets:
-  - path: my_data.jsonl
+  - path: enterprise_attack.jsonl
     ds_type: json
-    type:
-      # JSONL file contains question, context, answer fields per line.
-      # This gets mapped to instruction, input, output axolotl tags.
-      field_instruction: question
-      field_input: context
-      field_output: answer
-      # Format is used by axolotl to generate the prompt.
-      format: |-
-        [INST] Using the schema context below, generate a SQL query that answers the question.
-        {input}
-        {instruction} [/INST] 
+    type: alpaca
 ```
 
 **LoRA**
